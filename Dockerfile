@@ -2,8 +2,7 @@
 FROM nginx:alpine
 
 # Copier les fichiers du site statique dans le répertoire par défaut de Nginx
-COPY ./dist /usr/share/nginx/html
-
+COPY ./build /usr/share/nginx/html
 # Exposer le port 80 pour le serveur Nginx
 EXPOSE 80
 
