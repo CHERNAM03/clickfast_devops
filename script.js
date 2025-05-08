@@ -18,15 +18,15 @@ function initializeDOM() {
   // Attachement des gestionnaires d'événements
   const buttonClicker = document.getElementById("button-clicker");
   const buttonReset = document.getElementById("button-reset");
-  
+
   if (buttonClicker) {
     buttonClicker.addEventListener("click", incrementScore);
   }
-  
+
   if (buttonReset) {
     buttonReset.addEventListener("click", resetScore);
   }
-  
+
   // Initialiser l'affichage du score
   const scoreElement = document.getElementById("score");
   if (scoreElement) {
@@ -34,15 +34,8 @@ function initializeDOM() {
   }
 }
 
-// Exécuter l'initialisation quand le DOM est chargé
-if (typeof window !== 'undefined') {
-  document.addEventListener("DOMContentLoaded", () => {
-    initializeDOM();
-  });
-}
-
-// Exporter les fonctions pour les tests
-if (typeof module !== 'undefined' && module.exports) {
+// Exporter les fonctions pour les tests ou pour d'autres fichiers
+if (typeof module !== "undefined" && module.exports) {
   module.exports = {
     initializeDOM,
     incrementScore,
@@ -52,6 +45,6 @@ if (typeof module !== 'undefined' && module.exports) {
     // Fonction pour définir le score (utile pour les tests)
     setScore: (newScore) => {
       score = newScore;
-    }
+    },
   };
 }
