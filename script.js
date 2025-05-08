@@ -1,44 +1,57 @@
-let count = 0; // Compteur de clics
-let timeLeft = 5; // Temps imparti en secondes
-let isGameActive = false; // Indique si le jeu est actif
+// Variables globales
+let score = 0;
 
-const button = document.getElementById('myButton');
-const clickCountDisplay = document.getElementById('clickCount');
-const timerDisplay = document.createElement('p'); // Affichage du chrono
-timerDisplay.id = 'timer';
-timerDisplay.textContent = `Temps restant : ${timeLeft}s`;
-document.getElementById('container').appendChild(timerDisplay);
-
-// Fonction pour démarrer le jeu
-function startGame() {
-    if (isGameActive) return; // Empêche de redémarrer le jeu si déjà actif
-
-    isGameActive = true;
-    count = 0;
-    timeLeft = 5;
-    clickCountDisplay.textContent = `Nombre de clics : ${count}`;
-    timerDisplay.textContent = `Temps restant : ${timeLeft}s`;
-
-    // Décrémentation du chrono toutes les secondes
-    const timerInterval = setInterval(() => {
-        timeLeft--;
-        timerDisplay.textContent = `Temps restant : ${timeLeft}s`;
-
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval); // Arrête le chrono
-            isGameActive = false; // Désactive le jeu
-            timerDisplay.textContent = `Temps écoulé !`;
-        }
-    }, 1000);
+function incrementScore() {
+  score++;
+  console.log("Score incrémenté à:", score);
+  document.getElementById("score").textContent = score;
 }
 
-// Écouteur d'événement pour le bouton
-button.addEventListener('click', () => {
-    if (isGameActive && timeLeft > 0) {
-        count++;
-        clickCountDisplay.textContent = `Nombre de clics : ${count}`;
-    }
-});
+function resetScore() {
+  score = 0;
+  console.log("Score réinitialisé à:", score);
+  document.getElementById("score").textContent = score;
+}
 
-// Démarrage du jeu au premier clic
-button.addEventListener('click', startGame);
+// Initialisation du DOM
+function initializeDOM() {
+  // Attachement des gestionnaires d'événements
+  const buttonClicker = document.getElementById("button-clicker");
+  const buttonReset = document.getElementById("button-reset");
+  
+  if (buttonClicker) {
+    buttonClicker.addEventListener("click", incrementScore);
+  }
+  
+  if (buttonReset) {
+    buttonReset.addEventListener("click", resetScore);
+  }
+  
+  // Initialiser l'affichage du score
+  const scoreElement = document.getElementById("score");
+  if (scoreElement) {
+    scoreElement.textContent = score;
+  }
+}
+
+// Exécuter l'initialisation quand le DOM est chargé
+if (typeof window !== 'undefined') {
+  document.addEventListener("DOMContentLoaded", () => {
+    initializeDOM();
+  });
+}
+
+// Exporter les fonctions pour les tests
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    initializeDOM,
+    incrementScore,
+    resetScore,
+    // Fonction pour obtenir l'état actuel (utile pour les tests)
+    getScore: () => score,
+    // Fonction pour définir le score (utile pour les tests)
+    setScore: (newScore) => {
+      score = newScore;
+    }
+  };
+}

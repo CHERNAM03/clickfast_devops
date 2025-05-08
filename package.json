@@ -1,0 +1,26 @@
+{
+  "name": "clickfast",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "test": "npx jest scripts.test.js --env=jsdom"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CHERNAM03/clickfast_devops.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CHERNAM03/clickfast_devops/issues"
+  },
+  "homepage": "https://github.com/CHERNAM03/clickfast_devops#readme",
+  "description": "",
+  "dependencies": {
+    "jsdom": "^26.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
